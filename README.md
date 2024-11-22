@@ -14,11 +14,11 @@ Select the desired animation clip in the animator window, then press the "Add Be
 Then choose "IAnimationTrigger[]" in the Triggers field:
 (image placeholder)
 
-Add a new trigger of desired type (Global or Target). Then create a Scriptable Object of type GlobalEvent or TargetEvent, based on your trigger choice, and drag the SO to the "Target Event" field:
+Add a new Global trigger. Then create a Scriptable Object of type GlobalEvent and drag the SO to the "Global Event" field:
 (image placeholder)
 
 Add an "Event Subscriber" component to your desired game object:
 (image placeholder)
 
-Inside the "Event Subscriber" component create a new event of the same type as your Trigger and SO. Put the SO as the "Key" in the according field and then add the value - the action that should be performed when the event happens:
+Inside the "Event Subscriber" component create a new Global event. Inside "Global Events" section, select your SO. Then inside the "Event Actions" section, put the SO as the "Key" in the according field and add the value - the action that should be performed when the event happens:
 (image placeholder)
