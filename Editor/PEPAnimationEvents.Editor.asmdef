@@ -1,0 +1,18 @@
+{
+    "name": "PEPAnimationEvents.Editor",
+    "rootNamespace": "Pepengineers",
+    "references": [
+        "GUID:b4f52c7fd26166f48b2cfe366b752a32"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
