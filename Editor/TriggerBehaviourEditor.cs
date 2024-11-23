@@ -48,7 +48,8 @@ namespace Pepengineers.PEPAnimationEvents.Editor
                         EnforceTPose();
                         isPreviewing = false;
                         AnimationMode.StopAnimationMode();
-                        playableGraph.Destroy();
+                        
+                        if (playableGraph.IsValid()) playableGraph.Destroy();
                     }
                     else
                     {
