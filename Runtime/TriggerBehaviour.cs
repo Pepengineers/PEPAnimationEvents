@@ -57,8 +57,7 @@ namespace Pepengineers.PEPAnimationEvents.Runtime
             if (triggerTime < 1f) return;
             if (hasTriggered) return;
                 
-            var currentIterationTime = stateInfo.normalizedTime % 1f;
-            if (currentIterationTime + Time.deltaTime >= 1f)
+            if (stateInfo.normalizedTime + Time.deltaTime >= 1f)
             {
                 Notify(animator);
             }
