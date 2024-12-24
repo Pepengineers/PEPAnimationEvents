@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Pepengineers.PEPAnimationEvents.Runtime
 {
-    internal sealed class TimedTriggerBehaviour : TriggerBehaviour
+    public class TimedTriggerBehaviour : TriggerBehaviour
     {
         [SerializeField] [Range(0f, 1f)] private float triggerTime;
         [SerializeField] private bool once;
