@@ -16,8 +16,8 @@ namespace Pepengineers.PEPAnimationEvents.Editor
     ///     and handling animation events within the Unity editor. Enables users to preview animations and manage
     ///     animation events directly in the editor.
     /// </summary>
-    [CustomEditor(typeof(TriggerBehaviour), true)]
-    internal sealed class TriggerBehaviourEditor :
+    [CustomEditor(typeof(TimedTriggerBehaviour), true)]
+    internal sealed class TimedTriggerBehaviourEditor :
 #if ODIN_INSPECTOR
         OdinEditor
 #else
@@ -35,7 +35,7 @@ namespace Pepengineers.PEPAnimationEvents.Editor
         {
             DrawDefaultInspector();
 
-            var stateBehaviour = (TriggerBehaviour)target;
+            var stateBehaviour = (TimedTriggerBehaviour)target;
 
             if (Validate(stateBehaviour, out var errorMessage))
             {
@@ -70,7 +70,7 @@ namespace Pepengineers.PEPAnimationEvents.Editor
             }
         }
 
-        private void PreviewAnimationClip(TriggerBehaviour stateBehaviour)
+        private void PreviewAnimationClip(TimedTriggerBehaviour stateBehaviour)
         {
             var animatorController = GetValidAnimatorController(out var errorMessage);
             if (animatorController == null)
@@ -100,7 +100,7 @@ namespace Pepengineers.PEPAnimationEvents.Editor
             AnimationMode.SampleAnimationClip(Selection.activeGameObject, clip, previewTime);
         }
 
-        private void SampleBlendTreeAnimation(TriggerBehaviour stateBehaviour, float normalizedTime)
+        private void SampleBlendTreeAnimation(TimedTriggerBehaviour stateBehaviour, float normalizedTime)
         {
             var animator = Selection.activeGameObject.GetComponent<Animator>();
 
@@ -220,7 +220,7 @@ namespace Pepengineers.PEPAnimationEvents.Editor
 
         }
 
-        private static ChildAnimatorState FindMatchingState(AnimatorStateMachine stateMachine, TriggerBehaviour stateBehaviour)
+        private static ChildAnimatorState FindMatchingState(AnimatorStateMachine stateMachine, TimedTriggerBehaviour stateBehaviour)
         {
             foreach (var state in stateMachine.states)
                 if (state.state.behaviours.Contains(stateBehaviour))
@@ -235,7 +235,7 @@ namespace Pepengineers.PEPAnimationEvents.Editor
             return default;
         }
 
-        private bool Validate(TriggerBehaviour stateBehaviour, out string errorMessage)
+        private bool Validate(TimedTriggerBehaviour stateBehaviour, out string errorMessage)
         {
             var animatorController = GetValidAnimatorController(out errorMessage);
             if (animatorController == null) return false;
