@@ -2,7 +2,9 @@ using System;
 using System.Linq;
 using System.Reflection;
 using Pepengineers.PEPAnimationEvents.Runtime;
+#if ODIN_INSPECTOR
 using Sirenix.OdinInspector.Editor;
+#endif
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
@@ -21,7 +23,7 @@ namespace Pepengineers.PEPAnimationEvents.Editor
 #if ODIN_INSPECTOR
         OdinEditor
 #else
-        Editor
+        UnityEditor.Editor
 #endif
     {
         private Motion previewClip;
@@ -30,6 +32,25 @@ namespace Pepengineers.PEPAnimationEvents.Editor
 
         private PlayableGraph playableGraph;
         private AnimationMixerPlayable mixer;
+
+#if ODIN_INSPECTOR
+        protected override void OnDisable()
+#else
+        private void OnDisable()
+#endif
+        {
+            StopPreview();
+#if ODIN_INSPECTOR
+            base.OnDisable();
+#endif
+        }
+
+        private void StopPreview()
+        {
+            if (isPreviewing) AnimationMode.StopAnimationMode();
+            isPreviewing = false;
+            if (playableGraph.IsValid()) playableGraph.Destroy();
+        }
 
         public override void OnInspectorGUI()
         {
@@ -46,10 +67,7 @@ namespace Pepengineers.PEPAnimationEvents.Editor
                     if (GUILayout.Button("Stop Preview"))
                     {
                         EnforceTPose();
-                        isPreviewing = false;
-                        AnimationMode.StopAnimationMode();
-                        
-                        if (playableGraph.IsValid()) playableGraph.Destroy();
+                        StopPreview();
                     }
                     else
                     {

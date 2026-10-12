@@ -17,6 +17,7 @@ namespace Pepengineers.PEPAnimationEvents.Runtime
             hasTriggered = false;
             if (triggerTime <= 0.00f)
             {
+                triggeredCount = (uint)Mathf.Max(0, Mathf.FloorToInt(stateInfo.normalizedTime));
                 Notify(animator);
             }
         }
@@ -44,6 +45,9 @@ namespace Pepengineers.PEPAnimationEvents.Runtime
                 if (currentIterationTime < triggerTime) return; 
             } 
             
+            // Track the reached loop, so skipped loops do not replay on subsequent frames.
+            triggeredCount = (uint)iterationsCompleted;
+            if (triggerTime >= 1f) triggeredCount--;
             Notify(animator);
         }
 
